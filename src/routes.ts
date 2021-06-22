@@ -1,13 +1,11 @@
 import { Router } from "express";
 
+import { CreateUserController } from './controllers/CreateUserController';
+
+const createUserController = new CreateUserController();
+
 const routes = Router();
 
-routes.get('/test', (req, res) => {
-    return res.send('Olá NLW');
-});
-
-routes.post('/test-post', (req, res) => {
-    return res.send('Olá NLW método POST');
-});
+routes.post('/users', createUserController.handle);
 
 export default routes;
