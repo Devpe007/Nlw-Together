@@ -11,15 +11,16 @@ const authenticateUserController = new AuthenticateUserController();
 const createComplimentController = new CreateComplimentController();
 
 import { ensureAdmin } from "./middlewares/validations/ensureAdmin"; 
+import { ensureAuthenticated } from "./middlewares/authentication/ensureAuthenticated"; 
 
 const routes = Router();
 
 routes.post('/users', createUserController.handle);
 
-routes.post('/tags', ensureAdmin, createTagController.handle);
+routes.post('/tags', ensureAuthenticated, ensureAdmin, createTagController.handle);
 
 routes.post('/login', authenticateUserController.handle);
 
-routes.post('/compliments', createComplimentController.handle);
+routes.post('/compliments', ensureAuthenticated , createComplimentController.handle);
 
 export default routes;
